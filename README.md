@@ -51,3 +51,51 @@ sudo apt install redis-tools
 ```bash
 redis-cli
 ```
+## CRIANDO STRINGS
+
+tipo string, que nos traz a possibilidade de você armazenar uma chave associada a um valor. Esse valor é um texto, pode ser criado a chave e associar ela  
+
+* Chave e Valor
+
+```bash
+SET 1 "Engenharia de Dados"
+```
+![1](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/02cdb82e-2e6b-40f4-b724-bd0b0074eb1a)
+
+Agora eu posso recuperar um texto, uma string pela chave usando get.
+
+* retorna
+
+```bash
+GET 1
+```
+![2](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/3fd73b03-a530-4bf5-a0d4-7d7b51bdecd3)
+
+Existe a possibilidade também de incluir várias chaves simultaneamente. Para isso, eu uso M7.
+
+* inclui várias chaves
+
+```bash
+MSET 1040 ANALISTA 1050 GERENTE 1060 TESTADOR
+```
+podemos tstar a existencia da chave usando o exists. Ele retorna 1 se o a chave existe e 0 se não existe.
+
+* Testar existencia
+```bash
+EXISTS 1
+```
+![3](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/afe1a2f9-023e-4d0d-af0d-4a9ddb19f9a8)
+
+* Tipo de chave
+ 
+```bash
+TYPE 1
+```
+
+Podemos deletar a chave com o DEL e o numero da chave
+
+* Exclui pela chave
+
+```bash
+DEL 1
+```
