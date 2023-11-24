@@ -78,7 +78,7 @@ Existe a possibilidade também de incluir várias chaves simultaneamente. Para i
 ```bash
 MSET 1040 ANALISTA 1050 GERENTE 1060 TESTADOR
 ```
-podemos tstar a existencia da chave usando o exists. Ele retorna 1 se o a chave existe e 0 se não existe.
+podemos testar a existencia da chave usando o exists. Ele retorna 1 se o a chave existe e 0 se não existe.
 
 * Testar existencia
 ```bash
@@ -99,3 +99,143 @@ Podemos deletar a chave com o DEL e o numero da chave
 ```bash
 DEL 1
 ```
+
+Podemos definir a chava para expirar usando o `EXPIRE`
+
+* Expiração posterior - SEGUNDOS
+
+```bash
+EXPIRE 1 5
+```
+
+* Expiração em milesegundos
+
+```bash
+PEXPIRE 1 5000
+```
+podemos verificar quanto tempo resta para expirar e remover a expiração
+
+* Retonar tempo para expirar MILESEGUNDOS
+
+```bash
+PTTL 1
+```
+* Retonar tempo para expirar Segundos
+
+```bash
+TTL 1
+```
+* Remover expiração
+
+```bash
+PERSIST 1
+```
+
+Podemos atualizar o valor de uma String, vamos usar achave e valor: MSET 1040 ANALISTA, atulizar o valor para o nome "Engenheiro de Dados"
+
+* Atualiza e retorna o valor antigo
+
+```bash
+GETSET 1040 "Engenheiro de Dados"
+```
+
+Podemos verificar o valor de varias chaves com o `MGET`. Basta colocar o comando e as chaves
+
+* Retorna várias chaves
+
+```bash
+MGET 1 2 3 4
+```
+
+Podemos verificar o comprimento do valor. 
+
+* tamanho do campo valor
+
+```bash
+STRLEN 1
+```
+
+![5](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/e2505440-b677-4e5c-86c6-a3a99840c0c5)
+
+## CRIANDO HASHS (Conjunto de campos/valores, associados a uma chave)
+
+Podemos criar uma chave com varios valores, semelhante a uma lista na linghagem de programação
+
+* HASHS - chave + {campo valor} { camp valor}
+
+```bash
+HMSET CADASTRO NOME JOSE PROFISSAO ENGENHEIRO CIDADE "SANTA MARIA"
+```
+
+* Retorna todos chave + valor
+
+```bash
+HGETALL CADASTRO
+```
+
+![6](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/6cebcaf3-a690-4db2-993e-70b84bd7df4b)
+
+Podemos excluir um campo (o valor será excluido junto)
+
+* Exclui CAMPO e valor pelo CHAVE A NOME DO CAMPO
+
+```bash
+HDEL CADASTRO CIDADE
+```
+
+Retornado os dados podemos verificar a exclusão
+
+* Retorna todos
+
+```bash
+HGETALL CADASTRO
+```
+
+![7](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/38960569-6e7b-4083-863b-9a7a225c6996)
+
+* Retorna valor PELO NOME DO CAMPO
+
+```bash
+HMGET CADASTRO NOME PROFISSAO
+```
+
+* Retorna todos os VALORES - sem campo
+
+```bash
+HVALS CADASTRO
+```
+
+* Todo o hash
+
+```bash
+HGETALL CADASTRO
+```
+
+* Verifica existencia pelo campo
+
+```bash
+HEXISTS CADASTRO NOME
+```
+
+![8](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/4b72040a-5b06-4aa8-92cc-0f98f7b095a8)
+
+* Retorna número de campos
+
+```bash
+HLEN CADASTRO
+```
+
+* Retonar lista de campos
+
+```bash
+HKEYS CADASTRO
+```
+
+* Saber o tipo
+
+```bash
+TYPE CADASTRO
+```
+
+![9](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/0fcaf9f4-0dc4-4c91-8c89-f4182d0b9010)
+
