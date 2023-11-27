@@ -1,6 +1,11 @@
 # NoSQL-chave-valor--Redis-e-EC2
 Projeto NoSQL com o objetivo de teste e aprendizado
 
+# Tudo sobre oque é o Redis
+```bash
+https://aws.amazon.com/pt/elasticache/what-is-redis/#:~:text=Redis%20%C3%A9%20um%20acr%C3%B4nimo%20de,o%20melhor%20desempenho%20do%20mercado.
+```
+
 # Criando e configurando uma instância no EC2
 
 * Procurar por EC2 na pesquisa
@@ -238,4 +243,131 @@ TYPE CADASTRO
 ```
 
 ![9](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/0fcaf9f4-0dc4-4c91-8c89-f4182d0b9010)
+
+## CRIANDO LIST
+Lista de strings com chave única que pode ser inseridas separadamente. Uma lista ou uma sequência de strings. Porém, elas estão associadas a uma chave única e também você pode inserir ou remover elementos nesta lista.
+
+* Inclusão no inicio da lista
+ 
+```bash
+LPUSH 4545 SQLSERVER ORACLE POSTGRES MYSQL
+```
+
+Com o `TYPE` pode-se vereficar o tipo, se é ula lista ou não
+
+* TIPO
+  
+```bash
+TYPE 4545
+```
+
+Eu posso recuperar elementos individuais ou um intervalo, eu posso utilizar ele range. Vejam que eu posso definir aqui uma chave de início, uma chave de fim.
+
+* Retorna intervalo
+  
+```bash
+LRANGE 4545 0 3
+```
+![10](https://github.com/JulioMancini/NoSQL-chave-valor--Redis-e-EC2/assets/145502330/13471d4c-f8dc-419d-92a8-d26c2a9c27e2)
+
+* Inserindo novos elementos no fim da lista
+Essa ação é muito simples. Basta colocar RPUSH numero da chave e o elemento
+
+ ```bash
+RPUSH 4545 DB2
+```
+
+Podemos inserir Antes ou Depois de um determinado valor
+
+* Insere antes de valor
+ 
+ ```bash
+LINSERT 4545 BEFORE FIREBIRD SQLITE
+```
+
+* Insere depois de valor
+
+ ```bash
+LINSERT 4545 AFTER ORACLE FIREBIRD
+```
+Vamos supor, então, que eu queira atualizar. Um elemento, o elemento da posição é indexado em zero
+
+* Atualizar
+  
+ ```bash
+LSET 4545 1 POSTGRESQL
+```
+
+Eu posso remover elementos também. Eu não preciso passar a posição do elemento porque ele vai remover o primeiro elemento
+
+* Remove pelo inicio
+
+ ```bash
+LPOP 4545
+```
+Eu posso também remover pelo pelo fim.
+
+* Remove pelo fim
+
+```bash
+RPOP 4545
+```
+
+## CRIANDO SETS
+
+Agora vai vamos ver sets, que é uma coleção não ordenada, não repetida, é semelhante a uma lista, porém ela não tem uma ordenação. Então, ela não consegue inserir valores repetidos. Ela simplesmente vai ignorar se o valor tiver repetido.
+
+* SETS - Coleção não ordenada, não repetida (empilhando elementos).
+
+```bash
+SADD 123 ELEMENTO1 ELEMENTO2 ELEMENTO3 ELEMENTO 4
+```
+
+Na mesma chave eu posso colocar mais elementos e vejam que diferente lá das listas.
+
+```bash
+SADD 123 ELEMENTO5 ELEMENTO6 ELEMENTO7 
+```
+
+Para recuperar os valores `SMEMBERS` e a chave
+
+* Recupera valores
+  
+```bash
+SMEMBERS 123 
+```
+
+* Número de Membros
+
+```bash
+SCARD 123 
+```
+
+* Verifica se um Valor é Membro
+
+```bash
+SISMEMBER 13 ELEMENTO1
+```
+
+* Removendo
+
+```bash
+SREM 123 ELEMENTO1
+```
+
+* Adicionando outro set
+
+```bash
+SADD 111 ELEMENTO8 ELEMENTO9 ELEMENTO10 
+```
+
+Podemos verificar a diferença entre dois conjuntos. Parra isso usamos o `SDIFF` A chave de um elemento é a chave do outro elemento que eu quero buscar a diferença.
+
+```bash
+SDIFF 123 111 
+```
+
+## CRIANDO ZSETS
+
+tipo especial de conjunto, porém eles são ordenados e baseados em um escore. Então, além da chave e do valor, você define o score.
 
