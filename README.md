@@ -369,5 +369,76 @@ SDIFF 123 111
 
 ## CRIANDO ZSETS
 
-tipo especial de conjunto, porém eles são ordenados e baseados em um escore. Então, além da chave e do valor, você define o score.
+tipo especial de conjunto, porém eles são ordenados e baseados em um escore. Então, além da chave e do valor, você define o score. Para criar basta colocar o ZADD + chave + peso + valor
 
+* Ordenados baseados em score - não repetido
+
+```bash
+ZADD 1 0 ELEMENTO1
+ZADD 1 5 ELEMENTO2
+ZADD 1 4 ELEMENTO3 
+```
+
+* Número de Elementos
+
+```bash
+ZCARD 1 
+```
+
+* Índice de um membro
+
+ ```bash
+ZRANK 1 ELEMENTO3 
+```
+
+ * Conta membros com scores entre... retorna 3
+
+```bash
+ZCOUNT 1 0 5
+```
+
+* Retorna o score de um membro
+
+```bash
+ZSCORE 1 ELEMENTO3 
+```
+
+* Retorna Membros pelo Índice
+
+```bash
+ZRANGE 1 0 2 
+```
+
+* Remove
+
+```bash
+ZREM 1 ELEMENTO3
+```
+
+## CONTROLANDO TRANSAÇÕES
+
+Lembrando que o conceito de transações é semelhante ao de um banco de dados relacional, porém que as palavras chave são um pouco diferentes.
+
+1. MULTI:  Marca o inicio das transações
+2. EXEC: Executa todos os comandos depois de MULTI
+3. DISCARD: Descarta todos os comandos depois de MULTI
+
+* iniciando o controle de transação
+
+```bash
+MULTI
+```
+
+Exemplo 
+
+```bash
+SET 145 "REDIS NOSQL"
+SET 146 "MONGODB NOSQL"
+```
+
+DISCARD teste
+  
+```bash
+SET 1213 "REDIS NOSQL"
+SET 1214 "MONGODB NOSQL"
+```
